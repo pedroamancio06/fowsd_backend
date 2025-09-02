@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-FowsdApplication<fowsd>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.fowsd.fowsd.FowsdApplication",
+            "projectName": "fowsd",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
