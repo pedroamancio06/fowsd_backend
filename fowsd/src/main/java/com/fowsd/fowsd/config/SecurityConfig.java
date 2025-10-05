@@ -25,8 +25,18 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .authorizeHttpRequests(auth -> auth
+                    // PERMITE ENDPOINTS PÚBLICOS (Swagger e Login)
                     .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/actuator/**").permitAll()
-                    .requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers("/api/auth/**").permitAll() 
+                    
+                    // --- O BLOCO QUE VOCÊ DEVE ADICIONAR VEM AQUI ---
+                    
+                    // Exemplo 1: Se o Dashboard for público (NÃO RECOMENDADO, mas libera o acesso)
+                    // .requestMatchers("/api/v1/dashboard", "/api/v1/leituras/sensor/**").permitAll()
+                    
+                    // Se você NÃO quer que sejam públicos, não precisa adicionar nada aqui!
+                    
+                    // TUDO MAIS EXIGE AUTENTICAÇÃO (cart, orders, /api/v1/dashboard, /api/v1/leituras/...)
                     .anyRequest().authenticated()
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
